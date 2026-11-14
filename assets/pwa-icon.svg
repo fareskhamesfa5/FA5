@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#111311"/>
+  <path d="M72 104h368v22H72z" fill="#d4ff3f" opacity=".9"/>
+  <text x="256" y="310" text-anchor="middle" font-family="Arial,sans-serif" font-size="170" font-weight="900" letter-spacing="-13" fill="#f8f8f4">FA<tspan fill="#d4ff3f">5</tspan></text>
+  <text x="256" y="370" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="8" fill="#9b85ff">FIFTH GENERATION</text>
+  <circle cx="430" cy="430" r="13" fill="#d4ff3f"/>
+</svg>
