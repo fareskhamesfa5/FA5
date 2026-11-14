@@ -180,3 +180,13 @@ body.theme-light{
 /* Darken the profile tagline accent slightly */
 .profile-caption h3 em{color:#b8d936}
 .theme-light .profile-caption h3 em{color:#8eaa32}
+
+
+/* Profile portrait: remove the frame and let the photo stand naturally */
+.profile-photo{
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  filter:none;
+}
+.theme-light .profile-photo{border:0;box-shadow:none}
