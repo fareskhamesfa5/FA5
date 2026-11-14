@@ -179,7 +179,7 @@
       timeZone: cairoTimeZone, timeZoneName: "longOffset", hour: "2-digit"
     }).formatToParts(date);
     const offset = parts.find(part => part.type === "timeZoneName")?.value || "GMT+02:00";
-    const match = offset.match(/GMT([+-])(\\d{2}):(\\d{2})/);
+    const match = offset.match(/GMT([+-])(\d{2}):(\d{2})/);
     if (!match) return 120;
     return (match[1] === "-" ? -1 : 1) * (Number(match[2]) * 60 + Number(match[3]));
   };
