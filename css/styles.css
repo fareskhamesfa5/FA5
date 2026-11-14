@@ -190,3 +190,12 @@ body.theme-light{
   filter:none;
 }
 .theme-light .profile-photo{border:0;box-shadow:none}
+
+
+/* Enlarge the profile portrait */
+.profile-portrait{min-height:390px}
+.profile-photo{width:min(88%,340px);height:360px}
+@media(max-width:760px){
+  .profile-portrait{min-height:350px}
+  .profile-photo{width:min(90%,320px);height:330px}
+}
