@@ -136,6 +136,62 @@
     });
   }
 
+
+  const websiteCard = $(".website-card-locked");
+  const countdownModal = $("#launch-countdown");
+  const countdownFinished = $("[data-countdown-finished]");
+  const launchDate = new Date("2026-12-05T14:00:00+02:00").getTime();
+  let countdownInterval = null;
+  const countdownParts = {
+    days: $("[data-countdown-days]"),
+    hours: $("[data-countdown-hours]"),
+    minutes: $("[data-countdown-minutes]"),
+    seconds: $("[data-countdown-seconds]")
+  };
+  const updateCountdown = () => {
+    const remaining = Math.max(0, launchDate - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const values = {
+      days: Math.floor(totalSeconds / 86400),
+      hours: Math.floor((totalSeconds % 86400) / 3600),
+      minutes: Math.floor((totalSeconds % 3600) / 60),
+      seconds: totalSeconds % 60
+    };
+    Object.entries(countdownParts).forEach(([key, element]) => {
+      if (element) element.textContent = String(values[key]).padStart(2, "0");
+    });
+    if (countdownFinished) countdownFinished.hidden = remaining > 0;
+    if (remaining <= 0 && countdownInterval) {
+      window.clearInterval(countdownInterval);
+      countdownInterval = null;
+    }
+  };
+  const closeCountdown = () => {
+    if (!countdownModal) return;
+    countdownModal.classList.remove("is-open");
+    countdownModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("countdown-open");
+    if (websiteCard) websiteCard.focus();
+  };
+  if (websiteCard && countdownModal) {
+    websiteCard.addEventListener("click", () => {
+      updateCountdown();
+      countdownModal.classList.add("is-open");
+      countdownModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("countdown-open");
+      const closeButton = $(".countdown-close", countdownModal);
+      if (closeButton) closeButton.focus();
+      if (!countdownInterval) countdownInterval = window.setInterval(updateCountdown, 1000);
+    });
+    $("[data-countdown-close]", countdownModal).forEach(button => {
+      button.addEventListener("click", closeCountdown);
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && countdownModal.classList.contains("is-open")) closeCountdown();
+    });
+    updateCountdown();
+  }
+
   if (form) {
     form.addEventListener("submit", event => {
       event.preventDefault();
