@@ -355,3 +355,8 @@ body.theme-light{
 body.countdown-open{overflow:hidden}
 @media(max-width:480px){.countdown-panel{padding:38px 15px 23px}.countdown-timer{gap:5px}.countdown-timer>div{padding:14px 2px}.countdown-timer span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.countdown-modal,.countdown-panel,.website-card-locked:after{transition:none}}
+
+/* PWA install control */
+.install-app{align-items:center;gap:8px;border:0;cursor:pointer;font-family:var(--font);white-space:nowrap}
+.install-app[hidden]{display:none!important}
+@media(max-width:760px){.install-app{display:inline-flex;padding:9px 10px;font-size:9px}.install-app[hidden]{display:none!important}}
