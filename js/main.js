@@ -164,6 +164,20 @@
     minutes: $("[data-countdown-minutes]"),
     seconds: $("[data-countdown-seconds]")
   };
+  const unlockWebsite = () => {
+    if (!websiteCard || websiteCard.dataset.unlocked === "true") return;
+    websiteCard.dataset.unlocked = "true";
+    websiteCard.classList.remove("website-card-locked");
+    websiteCard.setAttribute("aria-label", "افتح موقع كشكول");
+    const status = $(".website-locked", websiteCard);
+    if (status) status.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN NOW';
+    const description = $("p", websiteCard);
+    if (description) description.textContent = "موقع كشكول أصبح متاحًا — اضغط للدخول.";
+    const bottomText = $(".website-card-bottom span", websiteCard);
+    if (bottomText) bottomText.textContent = "اضغط لفتح الموقع";
+    const bottomIcon = $(".website-card-bottom i", websiteCard);
+    if (bottomIcon) bottomIcon.className = "fa-solid fa-arrow-up-right-from-square";
+  };
   const updateCountdown = () => {
     const remaining = Math.max(0, launchDate - Date.now());
     const totalSeconds = Math.floor(remaining / 1000);
@@ -177,6 +191,7 @@
       if (element) element.textContent = String(values[key]).padStart(2, "0");
     });
     if (countdownFinished) countdownFinished.hidden = remaining > 0;
+    if (remaining <= 0) unlockWebsite();
     if (remaining <= 0 && countdownInterval) {
       window.clearInterval(countdownInterval);
       countdownInterval = null;
@@ -192,6 +207,10 @@
   if (websiteCard && countdownModal) {
     websiteCard.addEventListener("click", () => {
       updateCountdown();
+      if (Date.now() >= launchDate) {
+        window.location.href = "https://fareskhamesfa5.github.io/Kshkooll/";
+        return;
+      }
       countdownModal.classList.add("is-open");
       countdownModal.setAttribute("aria-hidden", "false");
       document.body.classList.add("countdown-open");
