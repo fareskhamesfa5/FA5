@@ -91,7 +91,7 @@
   });
 
 
-  $(".faq-item > button").forEach(button => {
+  $$(".faq-item > button").forEach(button => {
     button.addEventListener("click", () => {
       const item = button.closest(".faq-item");
       const willOpen = !item.classList.contains("open");
@@ -183,7 +183,7 @@
       if (closeButton) closeButton.focus();
       if (!countdownInterval) countdownInterval = window.setInterval(updateCountdown, 1000);
     });
-    $("[data-countdown-close]", countdownModal).forEach(button => {
+    $$("[data-countdown-close]", countdownModal).forEach(button => {
       button.addEventListener("click", closeCountdown);
     });
     document.addEventListener("keydown", event => {
