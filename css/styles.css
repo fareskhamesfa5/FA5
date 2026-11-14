@@ -325,3 +325,33 @@ body.theme-light{
  .websites-page-number{min-width:36px;height:38px}
 }
 @media(max-width:420px){.websites-total{display:none}.websites-intro h2{font-size:35px}}
+
+
+/* Locked website card + launch countdown */
+.website-card-locked{width:100%;font:inherit;text-align:right;cursor:pointer;appearance:none}
+.website-card-locked:focus-visible{outline:3px solid #8b76ef;outline-offset:5px}
+.website-locked{display:flex;align-items:center;gap:8px;color:#a47735;font:800 8px "IBM Plex Mono";letter-spacing:1px}
+.website-locked i{font-size:12px}
+.website-card-locked .website-card-mark{filter:grayscale(.55);opacity:.78}
+.website-card-locked .website-card-bottom i{color:#a47735}
+.website-card-locked:hover .website-card-bottom i{transform:none}
+.website-card-locked:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.13) 48%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease;pointer-events:none}
+.website-card-locked:hover:after{transform:translateX(120%)}
+.countdown-modal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.countdown-modal.is-open{opacity:1;visibility:visible}
+.countdown-backdrop{position:absolute;inset:0;width:100%;height:100%;border:0;background:rgba(7,9,7,.76);backdrop-filter:blur(9px);cursor:default}
+.countdown-panel{position:relative;z-index:1;width:min(100%,510px);padding:38px 30px 30px;border:1px solid rgba(185,237,53,.35);background:var(--paper);color:var(--ink);box-shadow:0 30px 100px rgba(0,0,0,.35);text-align:center;transform:translateY(18px) scale(.98);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.countdown-modal.is-open .countdown-panel{transform:translateY(0) scale(1)}
+.countdown-close{position:absolute;top:13px;left:13px;width:35px;height:35px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:15px}
+.countdown-kicker{display:inline-flex;align-items:center;gap:8px;color:#8b76ef;font:700 9px "IBM Plex Mono";letter-spacing:1.5px}
+.countdown-panel h3{margin:17px 0 7px;font-size:clamp(24px,5vw,34px);font-weight:900}
+.countdown-description{margin:0;color:var(--muted);font-size:12px}
+.countdown-timer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:30px 0 24px;direction:ltr}
+.countdown-timer>div{display:flex;flex-direction:column;gap:7px;padding:17px 5px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(185,237,53,.13),rgba(128,105,232,.08))}
+.countdown-timer strong{font:800 clamp(25px,6vw,39px) "IBM Plex Mono";line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.countdown-timer span{font-size:10px;color:var(--muted)}
+.countdown-date{color:var(--muted);font:9px "IBM Plex Mono";letter-spacing:1px}
+.countdown-finished{margin:18px 0;color:#78942a;font-size:13px;font-weight:800}
+body.countdown-open{overflow:hidden}
+@media(max-width:480px){.countdown-panel{padding:38px 15px 23px}.countdown-timer{gap:5px}.countdown-timer>div{padding:14px 2px}.countdown-timer span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.countdown-modal,.countdown-panel,.website-card-locked:after{transition:none}}
