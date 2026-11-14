@@ -91,52 +91,6 @@
   });
 
 
-  // Websites pagination: show one card per page.
-  const websiteGrid = document.querySelector("#websites-grid");
-  if (websiteGrid) {
-    const websiteCards = Array.from(websiteGrid.querySelectorAll("[data-website-card]"));
-    const pagination = document.querySelector(".websites-pagination");
-    const pageButtons = pagination ? Array.from(pagination.querySelectorAll("[data-page]")) : [];
-    const prevPage = document.querySelector("[data-page-prev]");
-    const nextPage = document.querySelector("[data-page-next]");
-    const pageStatus = document.querySelector("#websites-page-status");
-    const pageSize = 1;
-    const pageCount = Math.ceil(websiteCards.length / pageSize);
-    let currentPage = 1;
-
-    const showWebsitePage = page => {
-      if (!pageCount) return;
-      currentPage = Math.max(1, Math.min(pageCount, page));
-      const first = (currentPage - 1) * pageSize;
-
-      websiteCards.forEach((card, index) => {
-        card.hidden = index < first || index >= first + pageSize;
-      });
-
-      pageButtons.forEach(button => {
-        const active = Number(button.dataset.page) === currentPage;
-        button.classList.toggle("active", active);
-        if (active) button.setAttribute("aria-current", "page");
-        else button.removeAttribute("aria-current");
-      });
-
-      if (prevPage) prevPage.disabled = currentPage === 1;
-      if (nextPage) nextPage.disabled = currentPage === pageCount;
-
-      if (pageStatus) {
-        const last = Math.min(first + pageSize, websiteCards.length);
-        pageStatus.textContent = "عرض " + (first + 1) + "–" + last + " من " + websiteCards.length + " مواقع";
-      }
-    };
-
-    pageButtons.forEach(button => {
-      button.addEventListener("click", () => showWebsitePage(Number(button.dataset.page)));
-    });
-    if (prevPage) prevPage.addEventListener("click", () => showWebsitePage(currentPage - 1));
-    if (nextPage) nextPage.addEventListener("click", () => showWebsitePage(currentPage + 1));
-    showWebsitePage(1);
-  }
-
   $(".faq-item > button").forEach(button => {
     button.addEventListener("click", () => {
       const item = button.closest(".faq-item");
