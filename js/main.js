@@ -205,17 +205,20 @@
   };
   const syncTrustedTime = async () => {
     try {
-      const response = await fetch("https://worldtimeapi.org/api/timezone/Africa/Cairo", { cache: "no-store" });
-      if (!response.ok) throw new Error("Time service unavailable");
-      const data = await response.json();
-      if (!Number.isFinite(data.unixtime)) throw new Error("Invalid time response");
-      trustedEpochAtSync = data.unixtime * 1000;
+      // اقرأ ترويسة Date من خادم الموقع نفسه لتجنب مشاكل CORS لخدمات الوقت الخارجية.
+      const syncUrl = new URL(window.location.href);
+      syncUrl.searchParams.set("_time_sync", String(Math.floor(Math.random() * 1e9)));
+      const response = await fetch(syncUrl.toString(), { method: "HEAD", cache: "no-store" });
+      const serverDate = response.headers.get("Date");
+      const serverEpoch = serverDate ? Date.parse(serverDate) : NaN;
+      if (!response.ok || !Number.isFinite(serverEpoch)) throw new Error("Server time unavailable");
+      trustedEpochAtSync = serverEpoch;
       monotonicAtSync = performance.now();
       updateCountdown();
     } catch (error) {
       if (countdownFinished) {
         countdownFinished.hidden = false;
-        countdownFinished.textContent = "جارٍ التحقق من توقيت مصر...";
+        countdownFinished.textContent = "تعذر الاتصال بخادم التوقيت. تحقق من اتصال الإنترنت ثم أعد المحاولة.";
       }
     }
   };
