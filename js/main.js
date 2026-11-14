@@ -140,7 +140,23 @@
   const websiteCard = $(".website-card-locked");
   const countdownModal = $("#launch-countdown");
   const countdownFinished = $("[data-countdown-finished]");
-  const launchDate = new Date("2026-12-05T14:00:00+02:00").getTime();
+  // موعد الإطلاق محسوب حسب توقيت القاهرة (مصر)، وليس توقيت جهاز الزائر.
+  const cairoTimeZone = "Africa/Cairo";
+  const cairoLaunchParts = { year: 2026, month: 12, day: 5, hour: 14, minute: 0, second: 0 };
+  const getCairoOffset = date => {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: cairoTimeZone, timeZoneName: "longOffset", hour: "2-digit"
+    }).formatToParts(date);
+    const offset = parts.find(part => part.type === "timeZoneName")?.value || "GMT+02:00";
+    const match = offset.match(/GMT([+-])(\\d{2}):(\\d{2})/);
+    if (!match) return 120;
+    return (match[1] === "-" ? -1 : 1) * (Number(match[2]) * 60 + Number(match[3]));
+  };
+  const cairoLaunchWallTime = Date.UTC(
+    cairoLaunchParts.year, cairoLaunchParts.month - 1, cairoLaunchParts.day,
+    cairoLaunchParts.hour, cairoLaunchParts.minute, cairoLaunchParts.second
+  );
+  const launchDate = cairoLaunchWallTime - getCairoOffset(new Date(cairoLaunchWallTime)) * 60000;
   let countdownInterval = null;
   const countdownParts = {
     days: $("[data-countdown-days]"),
