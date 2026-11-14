@@ -178,8 +178,14 @@
     const bottomIcon = $(".website-card-bottom i", websiteCard);
     if (bottomIcon) bottomIcon.className = "fa-solid fa-arrow-up-right-from-square";
   };
+  // Trusted Cairo time; device clock changes cannot unlock the site early.
+  let trustedEpochAtSync = null;
+  let monotonicAtSync = null;
+  const getTrustedNow = () => trustedEpochAtSync === null ? null : trustedEpochAtSync + performance.now() - monotonicAtSync;
   const updateCountdown = () => {
-    const remaining = Math.max(0, launchDate - Date.now());
+    const trustedNow = getTrustedNow();
+    if (trustedNow === null) return;
+    const remaining = Math.max(0, launchDate - trustedNow);
     const totalSeconds = Math.floor(remaining / 1000);
     const values = {
       days: Math.floor(totalSeconds / 86400),
@@ -197,6 +203,22 @@
       countdownInterval = null;
     }
   };
+  const syncTrustedTime = async () => {
+    try {
+      const response = await fetch("https://worldtimeapi.org/api/timezone/Africa/Cairo", { cache: "no-store" });
+      if (!response.ok) throw new Error("Time service unavailable");
+      const data = await response.json();
+      if (!Number.isFinite(data.unixtime)) throw new Error("Invalid time response");
+      trustedEpochAtSync = data.unixtime * 1000;
+      monotonicAtSync = performance.now();
+      updateCountdown();
+    } catch (error) {
+      if (countdownFinished) {
+        countdownFinished.hidden = false;
+        countdownFinished.textContent = "جارٍ التحقق من توقيت مصر...";
+      }
+    }
+  };
   const closeCountdown = () => {
     if (!countdownModal) return;
     countdownModal.classList.remove("is-open");
@@ -207,7 +229,7 @@
   if (websiteCard && countdownModal) {
     websiteCard.addEventListener("click", () => {
       updateCountdown();
-      if (Date.now() >= launchDate) {
+      if (getTrustedNow() !== null && getTrustedNow() >= launchDate) {
         window.location.href = "https://fareskhamesfa5.github.io/Kshkooll/";
         return;
       }
@@ -224,7 +246,10 @@
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && countdownModal.classList.contains("is-open")) closeCountdown();
     });
+    syncTrustedTime();
+    window.setInterval(syncTrustedTime, 60000);
     updateCountdown();
+    if (!countdownInterval) countdownInterval = window.setInterval(updateCountdown, 1000);
   }
 
   if (form) {
