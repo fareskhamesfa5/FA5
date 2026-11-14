@@ -12,10 +12,10 @@
   "theme_color": "#111311",
   "icons": [
     {
-      "src": "assets/pwa-icon.svg",
+      "src": "assets/fA5-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
