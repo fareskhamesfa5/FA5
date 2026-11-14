@@ -175,3 +175,8 @@ body.theme-light{
 .profile-photo{position:relative;z-index:1;width:min(72%,260px);height:290px;object-fit:cover;object-position:center 25%;border:2px solid rgba(212,255,63,.65);border-radius:48% 48% 8px 8px;box-shadow:0 0 0 12px rgba(212,255,63,.06),0 22px 55px #0008;filter:saturate(.9) contrast(1.04)}
 .theme-light .profile-photo{border-color:rgba(113,145,48,.55);box-shadow:0 0 0 12px rgba(113,145,48,.08),0 22px 55px rgba(43,55,31,.2)}
 @media(max-width:760px){.profile-photo{height:255px;width:min(72%,230px)}}
+
+
+/* Darken the profile tagline accent slightly */
+.profile-caption h3 em{color:#b8d936}
+.theme-light .profile-caption h3 em{color:#8eaa32}
