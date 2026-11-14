@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "fa5-pwa-v1";
+const CACHE_NAME = "fa5-pwa-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
