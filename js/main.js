@@ -91,7 +91,7 @@
   });
 
 
-  // Websites pagination: show two cards per page.
+  // Websites pagination: show one card per page.
   const websiteGrid = document.querySelector("#websites-grid");
   if (websiteGrid) {
     const websiteCards = Array.from(websiteGrid.querySelectorAll("[data-website-card]"));
@@ -100,7 +100,7 @@
     const prevPage = document.querySelector("[data-page-prev]");
     const nextPage = document.querySelector("[data-page-next]");
     const pageStatus = document.querySelector("#websites-page-status");
-    const pageSize = 2;
+    const pageSize = 1;
     const pageCount = Math.ceil(websiteCards.length / pageSize);
     let currentPage = 1;
 
