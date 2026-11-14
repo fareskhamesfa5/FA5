@@ -19,6 +19,37 @@
   }
 
 
+
+  // PWA: register offline support and expose the native install prompt when available.
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(error => {
+        console.warn("FA5 offline support could not be enabled:", error);
+      });
+    });
+  }
+
+  let deferredInstallPrompt = null;
+  const installButton = $("#install-app");
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    if (installButton) installButton.hidden = false;
+  });
+  if (installButton) {
+    installButton.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      installButton.hidden = true;
+    });
+  }
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    if (installButton) installButton.hidden = true;
+  });
+
   if (year) year.textContent = new Date().getFullYear();
 
   const closeMenu = () => {
