@@ -145,12 +145,12 @@
           <span class="websites-total">01 <small>WEBSITE</small></span>
         </div>
         <div class="websites-grid" id="websites-grid" aria-label="مواقعنا">
-          <a class="website-card" href="https://fareskhamesfa5.github.io/Kshkooll/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع كشكول" data-website-card>
-            <div class="website-card-top"><span class="website-card-index">01 / WEBSITE</span><span class="website-live"><i></i> LIVE WEBSITE</span></div>
+          <button class="website-card website-card-locked" type="button" aria-label="موقع كشكول مقفل، يفتح يوم 5 ديسمبر الساعة 2" aria-haspopup="dialog" aria-controls="launch-countdown" data-website-card>
+            <div class="website-card-top"><span class="website-card-index">01 / WEBSITE</span><span class="website-locked"><i class="fa-solid fa-lock"></i> COMING SOON</span></div>
             <div class="website-card-brand"><span class="website-card-mark">K</span><div><strong>KSHKOOLL<span>.</span></strong><small>YOUR SPACE TO LEARN &amp; GROW</small></div></div>
-            <p>منصتك التعليمية لتنظيم رحلتك الدراسية والتعلّم في مكان واحد.</p>
-            <div class="website-card-bottom"><span>افتح موقع كشكول</span><i class="fa-solid fa-arrow-up-left"></i></div>
-          </a>
+            <p>موقع كشكول مقفول حاليًا — هيفتح يوم 5 ديسمبر الساعة 2.</p>
+            <div class="website-card-bottom"><span>اضغط لمعرفة موعد الإطلاق</span><i class="fa-solid fa-lock"></i></div>
+          </button>
           
           
           
@@ -161,7 +161,23 @@
           
           
         </div>
-        
+        <div class="countdown-modal" id="launch-countdown" role="dialog" aria-modal="true" aria-labelledby="countdown-title" aria-hidden="true">
+          <button class="countdown-backdrop" type="button" data-countdown-close aria-label="إغلاق النافذة"></button>
+          <div class="countdown-panel">
+            <button class="countdown-close" type="button" data-countdown-close aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+            <span class="countdown-kicker"><i class="fa-solid fa-lock"></i> LAUNCH COUNTDOWN</span>
+            <h3 id="countdown-title">كشكول هيفتح قريبًا</h3>
+            <p class="countdown-description">موعد الإطلاق يوم 5 ديسمبر، الساعة 2:00 ظهرًا.</p>
+            <div class="countdown-timer" aria-live="off">
+              <div><strong data-countdown-days>00</strong><span>يوم</span></div>
+              <div><strong data-countdown-hours>00</strong><span>ساعة</span></div>
+              <div><strong data-countdown-minutes>00</strong><span>دقيقة</span></div>
+              <div><strong data-countdown-seconds>00</strong><span>ثانية</span></div>
+            </div>
+            <p class="countdown-finished" data-countdown-finished hidden>وصلنا لموعد الإطلاق.</p>
+            <span class="countdown-date">05 / 12 / 2026 — 14:00 EET</span>
+          </div>
+        </div>
       </div>
     </section>
 
