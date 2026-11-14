@@ -360,3 +360,16 @@ body.countdown-open{overflow:hidden}
 .install-app{align-items:center;gap:8px;border:0;cursor:pointer;font-family:var(--font);white-space:nowrap}
 .install-app[hidden]{display:none!important}
 @media(max-width:760px){.install-app{display:inline-flex;padding:9px 10px;font-size:9px}.install-app[hidden]{display:none!important}}
+
+
+/* Keyboard focus and reduced-motion accessibility */
+:focus-visible{outline:3px solid var(--purple);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
