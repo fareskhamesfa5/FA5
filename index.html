@@ -16,6 +16,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- FA5 AdSense Auto Ads: inactive until an approved publisher ID is configured. -->
+  <script src="js/ads-config.js"></script>
+  <script>
+    (() => {
+      const clientId = String(window.FA5_ADSENSE_CLIENT_ID || "").trim();
+      if (!/^ca-pub-\d{16}$/.test(clientId)) return;
+      const adsScript = document.createElement("script");
+      adsScript.async = true;
+      adsScript.crossOrigin = "anonymous";
+      adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + encodeURIComponent(clientId);
+      document.head.appendChild(adsScript);
+    })();
+  </script>
 </head>
 <body>
   <div class="page-noise" aria-hidden="true"></div>
@@ -216,7 +229,7 @@
 
   <footer class="footer">
     <div class="wrap footer-main"><a class="brand footer-brand" href="#home"><img src="assets/fA5-logo.svg" alt=""><span class="brand-copy"><strong>FA<span>5</span></strong><small>FIFTH GENERATION</small></span></a><p>نبني الفكرة، نصمم التجربة، ونترك أثرًا في كل تفصيلة.</p><a class="back-top" href="#top" aria-label="العودة للأعلى"><i class="fa-solid fa-arrow-up"></i></a></div>
-    <div class="wrap footer-bottom"><span>© <span id="year"></span> FA5 — جميع الحقوق محفوظة</span><span>DESIGNED WITH PURPOSE / EGYPT</span><a href="mailto:fareskhamesfa5@gmail.com">LET'S CONNECT ↗</a></div>
+    <div class="wrap footer-bottom"><span>© <span id="year"></span> FA5 — جميع الحقوق محفوظة</span><span>DESIGNED WITH PURPOSE / EGYPT</span><a href="privacy.html">سياسة الخصوصية</a><a href="mailto:fareskhamesfa5@gmail.com">LET'S CONNECT ↗</a></div>
   </footer>
   <script src="js/main.js" defer></script>
 </body>
