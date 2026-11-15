@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "fa5-pwa-v2";
+const CACHE_NAME = "fa5-pwa-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -8,7 +8,8 @@ const APP_SHELL = [
   "./css/styles.css",
   "./js/main.js",
   "./assets/fA5-logo.svg",
-  "./assets/pwa-icon.svg"
+  "./assets/pwa-icon.svg",
+  "./assets/My%20fares.jpeg"
 ];
 
 self.addEventListener("install", event => {
